@@ -1,5 +1,4 @@
-# ytdl
 
-## На основе pytube
+## Based on yt-dlp
 
 ![preview](preview.jpg)

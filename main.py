@@ -1,7 +1,7 @@
 from sys import argv, exit
 from gui import Ui_MainWindow
 from PyQt5 import QtWidgets
-from pytube import YouTube
+from yt_dlp import YoutubeDL
 import threading
 
 
@@ -32,33 +32,24 @@ class MyWin(QtWidgets.QMainWindow):
         link = ['https://youtu.be/', 'youtu.be/', 'https://www.youtube.com/',
                 'www.youtube.com/']
         if any([temp.startswith(i) for i in link]):
-            if [temp.startswith(i) for i in ['https://youtu.be/', 'youtu.be/']]:
-                temp = temp.replace('youtu.be/', 'www.youtube.com/watch?v=')
             self.download_video(temp)
-            return self.ui.lineEdit.setText('Ждите ....')
+            return self.ui.lineEdit.setText('Wait ....')
         else:
-            return self.ui.lineEdit.setText('Невалидная ссылка!')
+            return self.ui.lineEdit.setText('Invalid link!')
 
     @thread
     @error
     def download_video(self, url):
-        yt = YouTube(url)
-        title = ''.join(i for i in yt.title if i not in '?:/|\\') + '.mp4'
-        stream = yt.streams.filter(progressive=True, file_extension='mp4')
+        opt = {'format': 'm4a/bestaudio/best'}
         if self.ui.radioButton_1.isChecked():
-            stream.get_highest_resolution().download('', title)
+            opt = {'format': '22'}
         elif self.ui.radioButton_2.isChecked():
-            # stream = yt.streams.filter(progressive=True, file_extension='mp4',
-            #                            resolution="360p")
-            # stream.get_by_resolution("360p").download('', title)
-            stream = yt.streams.get_by_itag('18')
-            stream.download('', title)
+            opt = {'format': '18'}
         elif self.ui.radioButton_3.isChecked():
-            stream = yt.streams.filter(only_audio=True).first()
-            title = ''.join(i for i in yt.title if i not in '?:/|\\') + '.mp3'
-            stream.download('', title)
-        # self.ui.label.setText(f'Ваше видео: {yt.title} скачивается')
-        self.ui.lineEdit.setText('Готово!')
+            opt = {'format': '17'}
+        with YoutubeDL(opt) as ydl:
+            ydl.download(url)
+        self.ui.lineEdit.setText('Downloaded!')
 
 
 if __name__ == "__main__":

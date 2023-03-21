@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
         self.lineEdit.setFont(font)
         self.lineEdit.setStyleSheet("background-color: rgb(170, 255, 255);")
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setToolTip("пример:\n"
+        self.lineEdit.setToolTip("example:\n"
                                  "https://www.youtube.com/watch?v=KJa5oJIaUQw&t"
                                  "\nhttps://youtu.be/KJa5oJIaUQw")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
@@ -42,8 +42,8 @@ class Ui_MainWindow(object):
         font.setStrikeOut(False)
         font.setKerning(True)
         self.pushButton.setFont(font)
-        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
-        # self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.UpArrowCursor))
+        # self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.UpArrowCursor))
         self.pushButton.setAcceptDrops(False)
         self.pushButton.setAutoFillBackground(False)
         self.pushButton.setStyleSheet("color: rgb(255, 0, 255);\n"
@@ -81,15 +81,20 @@ class Ui_MainWindow(object):
         self.radioButton_3.setGeometry(QtCore.QRect(460, 120, 15, 15))
         self.radioButton_3.setCursor(QtGui.QCursor(QtCore.Qt.UpArrowCursor))
         self.radioButton_3.setChecked(False)
-        self.radioButton_3.setToolTip('audio')
+        self.radioButton_3.setToolTip('144p')
+        self.radioButton_4 = QtWidgets.QRadioButton(self.centralwidget)
+        self.radioButton_4.setGeometry(QtCore.QRect(510, 120, 15, 15))
+        self.radioButton_4.setCursor(QtGui.QCursor(QtCore.Qt.UpArrowCursor))
+        self.radioButton_4.setChecked(False)
+        self.radioButton_4.setToolTip('audio')
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle("youtube download")
-        self.pushButton.setText("скачать")
-        self.label.setText("Вставьте вашу ссылку")
+        MainWindow.setWindowTitle("youtube downloader")
+        self.pushButton.setText("download")
+        self.label.setText("Paste your link")
         self.lineEdit.setText('')
-        self.label_2.setText('best     360    audio')
+        self.label_2.setText('720p   360p   144p  audio')
 
